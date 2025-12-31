@@ -1,5 +1,6 @@
 import { useState } from "react";
-import './App.css'
+import "./App.css";
+
 const WIN_PATTERNS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -22,15 +23,10 @@ export default function App() {
     Draws: 0,
   });
 
-  const checkWinner = (newBoard) => {
-    for (let pattern of WIN_PATTERNS) {
-      const [a, b, c] = pattern;
-      if (
-        newBoard[a] &&
-        newBoard[a] === newBoard[b] &&
-        newBoard[a] === newBoard[c]
-      ) {
-        return newBoard[a];
+  const checkWinner = (b) => {
+    for (let [a, b1, c] of WIN_PATTERNS) {
+      if (b[a] && b[a] === b[b1] && b[a] === b[c]) {
+        return b[a];
       }
     }
     return null;
@@ -46,35 +42,27 @@ export default function App() {
     const win = checkWinner(newBoard);
     if (win) {
       setWinner(win);
-      setScore((prev) => ({
-        ...prev,
-        [win]: prev[win] + 1,
-      }));
+      setScore((prev) => ({ ...prev, [win]: prev[win] + 1 }));
       return;
     }
 
-    if (newBoard.every((cell) => cell !== null)) {
+    if (newBoard.every(Boolean)) {
       setWinner("Draw");
-      setScore((prev) => ({
-        ...prev,
-        Draws: prev.Draws + 1,
-      }));
+      setScore((prev) => ({ ...prev, Draws: prev.Draws + 1 }));
       return;
     }
 
     setIsXTurn(!isXTurn);
   };
 
-  const playAgain = () => {
+  const restartRound = () => {
     setBoard(Array(9).fill(null));
     setWinner(null);
     setIsXTurn(true);
   };
 
   const resetAll = () => {
-    setBoard(Array(9).fill(null));
-    setWinner(null);
-    setIsXTurn(true);
+    restartRound();
     setScore({ X: 0, O: 0, Draws: 0 });
   };
 
@@ -97,19 +85,15 @@ export default function App() {
       </div>
 
       <div className="board">
-        {board.map((cell, idx) => (
-          <button
-            key={idx}
-            className={`cell ${cell ? "filled" : ""}`}
-            onClick={() => handleClick(idx)}
-          >
+        {board.map((cell, i) => (
+          <button key={i} className="cell" onClick={() => handleClick(i)}>
             {cell}
           </button>
         ))}
       </div>
 
       <div className="actions">
-        <button onClick={playAgain}>Play Again</button>
+        <button>Restart Round</button>
         <button onClick={resetAll}>Reset All</button>
       </div>
     </div>
