@@ -1,0 +1,138 @@
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* ---------- PAGE ---------- */
+body {
+  min-height: 100vh;
+  background: #e57373; /* soft pink-red background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- APP CARD ---------- */
+.app {
+  background: #ffffff;
+  width: 360px;
+  padding: 24px 22px 26px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* ---------- TITLE ---------- */
+.app h1 {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  color: #111827;
+}
+
+/* ---------- SCOREBOARD ---------- */
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.scoreboard span {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* ---------- STATUS ---------- */
+.status {
+  margin: 10px 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ---------- BOARD ---------- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+/* ---------- CELL ---------- */
+.cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 32px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #111827;
+  transition: all 0.15s ease;
+}
+
+.cell:hover {
+  background: #f9fafb;
+}
+
+.cell.filled {
+  cursor: default;
+}
+
+/* X & O colors */
+.cell:has(:contains("X")) {
+  color: #16a34a;
+}
+
+.cell:has(:contains("O")) {
+  color: #2563eb;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.actions button {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.actions button:first-child {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.actions button:last-child {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+
+.actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 420px) {
+  .app {
+    width: 92%;
+  }
+}
